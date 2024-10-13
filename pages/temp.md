@@ -1,6 +1,6 @@
 
 ---
-layout: default
+layout: midnight
 ---
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
