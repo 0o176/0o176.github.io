@@ -1,6 +1,9 @@
 .site-header {
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
+    left: 0;
+    right: 0;
     border-top: 5px solid #adadad;
     border-bottom: 1px solid #565656;
     min-height: 60px;
