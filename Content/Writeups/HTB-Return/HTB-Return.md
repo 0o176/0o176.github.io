@@ -68,17 +68,17 @@ Host script results:
 
 Dead end at the moment, maybe we will come back when we find some credentials.
 
-![SMB](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-10-52.png)
+![SMB](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-10-52.png)
 
 ## Web - TCP 80
 
 The website is a 'HTB Printer Admin Panel'
-![Web](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-07.png)
+![Web](/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-07.png)
 
 # Shell as svc-printer
 
 On the 'Settings' tab ther eis pre-filled form
-![Web2](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-18.png)
+![Web2](/HTB-Return/img/Screenshot_2024-10-30_05-11-18.png)
 
 ## Burp 
 
@@ -94,8 +94,8 @@ User can only change the Server Address ('ip'), and not port, username or passwo
 
 If we change the ip to our tun0 IP and start listener on port 389 we should catch some response.
 
-![Request](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-42.png)
-![Request2](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-58.png)
+![Request](/img/Screenshot_2024-10-30_05-11-42.png)
+![Request2](./img/Screenshot_2024-10-30_05-11-58.png)
 
 ...and it’s trying to authenticate so we have username and password.
 
@@ -103,11 +103,11 @@ If we change the ip to our tun0 IP and start listener on port 389 we should catc
 
 Credentials happen to work for WinRM, so we can get a shell usin Evil-WinRM
 
-![WinRm_shell](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-25-07.png)
+![WinRm_shell](./HTB-Return/img/Screenshot_2024-10-30_05-25-07.png)
 
 and get the user flag
 
-![WinRm_shell](./Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-31-22.png)
+![WinRm_shell](./Writeups/HTB-Return/img/Screenshot_2024-10-30_05-31-22.png)
 
 # Privilege Escalation
 
