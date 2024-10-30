@@ -5,7 +5,7 @@ title: "Home Page"
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[Link to another page](./another-page.html).
+[Link to another page](.Content/Writeups/HTB-Return//HTB-Return.md).
 
 There should be whitespace between paragraphs.
 
