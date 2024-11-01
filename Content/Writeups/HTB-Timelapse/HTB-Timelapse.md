@@ -110,7 +110,7 @@ openssl pkcs12 -in legacyy_dev_auth.pfx -clcerts -nokeys -out pfx_cert.crt
 
 We now have everything we need to finally get into the machine.
 
-Use `evil-winrm` and freshly extracted `pfx_key.key` and ` pfx_cert.crt` to get in.
+Use `evil-winrm` and freshly extracted `pfx_key.key` and `pfx_cert.crt` to get in.
 
 *   `-S` Enable SSL, because its connecting to 5986;
 *   `-c` pfx_cert.crt - provide the public key certificate
@@ -127,7 +127,96 @@ And we can get our user flag
 
 ![user_flag](/Content/Writeups/HTB-Timelapse/img/user_flag.png)
 
-TBC......
+# Shell as svc_deploy
+
+## Looking around
+
+As always start with checking privileges and group memberships.
+
+```powershell
+whoami /priv
+```
+
+![priv](/Content/Writeups/HTB-Timelapse/img/priv.png)
+
+```powershell
+net user legacyy
+```
+
+![groups](/Content/Writeups/HTB-Timelapse/img/groups.png)
+
+Nothing too interesting there, maybe the **Development** group could be useful later..
+
+## Powershell History
+
+One of the very important places to check is the `PS History` ([More here](https://www.sharepointdiary.com/2020/11/powershell-command-history.html))
+
+![ps_history1](/Content/Writeups/HTB-Timelapse/img/ps_history1.png)
+
+```powershell
+type C:\Users\legacyy\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+```
+
+The file contains few lines, including connecting to the host using the creds for another user, **svc_deploy**
+
+So we have new set of credentials: 
+    **svc_deploy**:**E3R$Q62^12p7PLlC%KWaxuaV**
+
+![ps_history2](/Content/Writeups/HTB-Timelapse/img/ps_history2.png)
+
+## Shell
+
+With the credential we get in previous step we can use `evil-winrm` to log in as another user and continue enumeration.
+
+![winrm_svc](/Content/Writeups/HTB-Timelapse/img/winrm_svc.png)
 
 # Privilege Escalation
 
+## Enumeration 
+
+Logged in as **svc_deploy** we need to check privileges and group memberships all over again.
+
+![winrm_svc2](/Content/Writeups/HTB-Timelapse/img/winrm_svc2.png)
+
+And we find something really important! User is member of **LAPS_Readers** ([More here](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/laps)).
+
+This means we can dump passwords for local administrator.
+
+There are 2 ways (that I know from top of my head), either use `netexec` or `PowerView`
+
+## Dump Admin password
+
+### Method 1: netexec
+
+If there is no access to a powershell you can abuse the LAPS_Readers group privileges remotely through LDAP by using
+
+```powershell
+netexec ldap 10.129.116.41 -u svc_deploy -p 'E3R$Q62^12p7PLlC%KWaxuaV' -M laps
+```
+This will dump all the passwords that the user can read, allowing you to get a better foothold with a different user.
+
+![adm_pass](/Content/Writeups/HTB-Timelapse/img/adm_pass.png)
+
+### Method 1: PowerView
+
+We can upload `PowerView.ps1` 
+
+![powerview1](/Content/Writeups/HTB-Timelapse/img/powerview1.png)
+
+Import it to PS
+
+![powerview2](/Content/Writeups/HTB-Timelapse/img/powerview2.png)
+
+And use `Get-ADComputer` module to get admin password.
+
+![powerview3](/Content/Writeups/HTB-Timelapse/img/powerview3.png)
+
+## Log in as admin
+
+With the admin credentials we can once again use `evil-winrm` to log in and grab the root flag.
+
+![admin_login](/Content/Writeups/HTB-Timelapse/img/admin_login.png)
+
+![root_flag](/Content/Writeups/HTB-Timelapse/img/root_flag.png)
+
+~
