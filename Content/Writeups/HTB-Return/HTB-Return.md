@@ -144,4 +144,4 @@ Start listener and as soon as we start the service again we catch the shell.
 
 ![sh2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-58-00.png)
 
-
+~
