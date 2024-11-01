@@ -1,7 +1,77 @@
 body {
     font: 400 16px / 1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background-color:#181818;
-    color: #e6e6e6;
+    background-color:#222222;
+    color: #eeeeee;
+}
+
+/**
+* Image
+*/
+img {
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+/**
+* Links
+*/
+a {
+  color: #00ff00;
+  text-decoration: none;
+
+  &:visited {
+    color:  #00ff00;
+  }
+
+  &:hover {
+    color: #00ff00;
+    text-decoration: underline;
+  }
+
+ 
+  .social-media-list &:hover {
+    text-decoration: none;
+
+    .username {
+      text-decoration: underline;
+    }
+  }
+}
+
+/**
+* Code formatting
+*/
+pre,
+code {
+  font-size: 0.9375em;
+  border: 1px solid;
+  border-radius: 3px;
+  background-color: #000080;
+}
+
+code {
+  padding: 1px 5px;
+}
+
+pre {
+  padding: 8px 12px;
+  overflow-x: auto;
+
+  > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.highlight {
+  border-radius: 3px;
+  background: #000080;
+  @extend %vertical-rhythm;
+
+  .highlighter-rouge & {
+    background: #000080;
+  }
 }
 
 .site-header {
@@ -14,7 +84,7 @@ body {
     border-bottom: 1px solid #565656;
     min-height: 60px;
     line-height: 54px;
-    background: #181818;
+    background: #040404;
     z-index: 1200;
     display: block;
 }
@@ -52,7 +122,7 @@ body {
   }
 
  .page-link {
-    color: #bbbbbb;
+    color: #ececec;
     line-height: 1.5;
     padding: 5px 15px;
     font-size: 18px;
