@@ -27,7 +27,14 @@ layout: base
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
+    <div class="post-nav">
+    <nav>
+        <ul></ul>
+    </nav>
+    </div>
+    <div class="post-content">
     {{ content }}
+    </div>
   </div>
 
   {%- if site.disqus.shortname -%}
