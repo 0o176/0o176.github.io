@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "HTB: Timelapse"
+toc: true
+toc_sticky: true
 ---
 
 {% include toc.html %}
