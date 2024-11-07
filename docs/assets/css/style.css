@@ -10,6 +10,7 @@ body {
 img {
     border: 1px solid;
     border-radius: 3px;
+    max-width: 100%;
 }
 
 /**
@@ -137,6 +138,19 @@ pre {
 .page-content {
     padding: 50px 0;
     flex: 1 0 auto;
+}
+
+.post-area{
+  display: flex;
+}
+
+.post-nav{
+  flex: 0 0 20%;
+}
+
+.post-content{
+  flex: 0 0 80%;
+  max-width: 80%;
 }
 
 .site-footer {
