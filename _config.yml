@@ -1,6 +1,6 @@
 # Site settings
 title: "0o176 - in work..."
-tagline: "Changing the world, one uninspired quote at a time"
+tagline: "None"
 url: "https://0o176.github.io" # The base hostname & protocol for your site. Use it if you need absolute URL's
 
 # Social
@@ -12,7 +12,7 @@ googleplus: gusername
 instagram: igusername
 
 # Contact
-phone: "916-276-1044" # This is my real number. You should text me.
+phone: "123-456-789" # This is my real number. You should text me.
 email: "hello@garrettboatman.com" # This is my real email address. Please don't email me.
 
 
@@ -21,3 +21,5 @@ plugins:
   - jekyll-seo-tag
 
 exclude: [.scss, README.md, node_modules, gruntfile.js, package.json]
+
+markdown: kramdown
