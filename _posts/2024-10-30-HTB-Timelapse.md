@@ -5,7 +5,8 @@ toc: true
 toc_sticky: true
 ---
 
-{% include toc.html %}
+* TOC
+{:toc}
 
 Timelapse, an easy-rated Active Directory machine from Hack The Box, starts by finding a key on an SMB share. After cracking it open and authenticationg via Evil-WinRM, we’ll find credentials in the PowerShell history file for the next user. That useris a member of **LAPS_Readers** group, which allows us to pull out local administrator passwords. With that, we’ll get the administrator password and use Evil-WinRM to get a shell.
 
