@@ -22,4 +22,5 @@ plugins:
 
 exclude: [.scss, README.md, node_modules, gruntfile.js, package.json]
 
-markdown: kramdown
+kramdown:
+  parse_block_html: true
