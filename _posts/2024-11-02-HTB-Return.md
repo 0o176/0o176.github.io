@@ -3,6 +3,8 @@ layout: post
 title: "HTB: Return"
 ---
 
+# Introduction
+
 Return is an easy Windows box on the Hack the Box platform that focuses on abusing printer web admin panel on an active directory domain to get user LDAP credentials. Use them to log in using Evil-WinRM and discover some interesting privileges like **SeLoadDriverPrivilege** or **SeBackupPrivilege**. As a bonus the account is in the **Server Operators** group, which allows it to modify, start, and stop services. Which can be easily used to get a shell as SYSTEM.
 
 # Recon

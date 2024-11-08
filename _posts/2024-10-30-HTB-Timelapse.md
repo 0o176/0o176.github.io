@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "HTB: Timelapse"
-toc: true
-toc_sticky: true
 ---
+
+# Introduction
 
 Timelapse, an easy-rated Active Directory machine from Hack The Box, starts by finding a key on an SMB share. After cracking it open and authenticationg via Evil-WinRM, we’ll find credentials in the PowerShell history file for the next user. That useris a member of **LAPS_Readers** group, which allows us to pull out local administrator passwords. With that, we’ll get the administrator password and use Evil-WinRM to get a shell.
 
@@ -199,7 +199,7 @@ This will dump all the passwords that the user can read, allowing you to get a b
 
 ![adm_pass](/docs/assets/img/HTB-Timelapse/adm_pass.png)
 
-### Method 1: PowerView
+### Method 2: PowerView
 
 We can upload `PowerView.ps1` 
 
