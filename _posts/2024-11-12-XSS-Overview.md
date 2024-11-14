@@ -27,8 +27,9 @@ There are three main types of XSS vulnerabilities:
 
 * Reflected (Non-Persistent) XSS occurs when user input is immediately returned to the page after being processed by the backend server (e.g., search result or error message), without permanently storing the user provided data.
 
-![Reflected1](/docs/assets/img/XSS-Overview/Reflected1.PNG) ![Reflected2](/docs/assets/img/XSS-Overview/Reflected2.PNG)
-
+| <!-- -->    | <!-- -->    |
+|-------------|-------------|
+![Reflected1](/docs/assets/img/XSS-Overview/Reflected1.PNG)  |  ![Reflected2](/docs/assets/img/XSS-Overview/Reflected2.PNG)
 
 * Stored (Persistent) XSS is the most critical type of XSS. It occurs when user input is stored on the back-end database and then displayed upon retrieval (e.g., posts or comments).
 
