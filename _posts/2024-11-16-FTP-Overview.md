@@ -5,8 +5,8 @@ title: "FTP Overview"
 
 # Basic Information
 
-The [File Transfer Protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol) (`FTP`) is a standard protocol used to transfer files across a network.
-By default, FTP listens on port `TCP/21`.
+The [File Transfer Protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol) (FTP) is a standard protocol used to transfer files across a network.
+By default, FTP listens on port **TCP/21**.
 
 ```shell-session
 PORT   STATE SERVICE
@@ -55,7 +55,7 @@ telnet {IP} 21
 nmap -sV -script banner -p21 -Pn {IP}
 ```
 
-Once the Banner discloses the the version running on FTP server, we can use `searchsploit` -> `<FTP name and version>` to hopefully get some already existing exploits.
+Once the Banner discloses the the version running on FTP server, we can use `searchsploit` to hopefully get some already existing exploits.
 
 # Connect
 
@@ -99,8 +99,6 @@ ftp>
 If there is no anonymous authentication available, we can also try to brute-force the login for the FTP services.
 There are many different tools to perform a brute-forcing attack.
 
-With ==`Medusa`==, we can use the option ==`-u`== to specify a single user to target, or you can use the option ==`-U`== to provide a file with a list of usernames. The option ==`-P`== is for a file containing a list of passwords. We can use the option ==`-M`== and the protocol we are targeting (FTP) and the option ==`-h`== for the target hostname or IP address.
-
 **Note:** Most applications today prevent brute-forcing attacks. A more effective method is Password Spraying.
 
 ### Brute Forcing with Medusa
@@ -141,6 +139,7 @@ FTP Bounce Attack is a network attack that exploits the FTP protocol's ability t
 It uses an FTP server's **PORT** command to route data to a third party, making the attack seem to originate from the server.
 
 [https://www.geeksforgeeks.org/what-is-ftp-bounce-attack/](https://www.geeksforgeeks.org/what-is-ftp-bounce-attack/)
+
 [FTP Bounce Attack](https://www.linux.org/threads/nmap-ftp-bounce-attack.4493/)
 
 ### Attack Execution
